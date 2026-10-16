@@ -60,6 +60,9 @@ MainWindow::MainWindow(QWidget *parent)
     fwdBtn = new QPushButton("→", this);
     fwdBtn->setFixedWidth(40);
     topLayout->addWidget(fwdBtn);
+    rldBtn = new QPushButton("⟳", this);
+    rldBtn->setFixedWidth(40);
+    topLayout->addWidget(rldBtn);
     uriLineEdit = new QLineEdit(this);
     uriLineEdit->setPlaceholderText("URLを入力してEnter");
     topLayout->addWidget(uriLineEdit);
@@ -99,6 +102,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(goBtn, &QPushButton::clicked, this, &MainWindow::navigateToUri);
     connect(backBtn, &QPushButton::clicked, view, &QWebEngineView::back);
     connect(fwdBtn, &QPushButton::clicked, view, &QWebEngineView::forward);
+    connect(rldBtn, &QPushButton::clicked, view, &QWebEngineView::reload);
     connect(view, &QWebEngineView::urlChanged, this, &MainWindow::updateAddressBar);
     connect(addBmBtn, &QPushButton::clicked, this, &MainWindow::addCurrentBookmark);
     connect(showBmBtn, &QPushButton::clicked, this, &MainWindow::showBookmarksMenu);

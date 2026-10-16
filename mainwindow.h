@@ -68,6 +68,7 @@ private:
 	CustomWebView *view;
 	QPushButton *backBtn;
 	QPushButton *fwdBtn;
+    QPushButton *rldBtn;
 	QPushButton *goBtn;
 	QPushButton *addBmBtn;
 	QPushButton *showBmBtn;
