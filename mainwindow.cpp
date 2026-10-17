@@ -108,6 +108,32 @@ MainWindow::MainWindow(QWidget *parent)
     connect(showBmBtn, &QPushButton::clicked, this, &MainWindow::showBookmarksMenu);
     connect(view->page(), &QWebEnginePage::permissionRequested, this, &MainWindow::handlePermissionRequested);
     connect(view->page(), &QWebEnginePage::fullScreenRequested, this, &MainWindow::handleFullScreenRequested);
+    connect(view, &QWebEngineView::loadFinished, this, [this](bool ok) {
+    if (!ok) return;
+
+    // 非表示にしたいCSSセレクタのリスト（コンマ区切り）
+    // .adchoices や .criteo-privacy などを指定
+    QString cssSelectors =
+        ".adchoices, #adchoices, .ad-choices, .ad_choices, "
+        "[title='AdChoices'], [class*='adchoices'], "
+        ".criteo-privacy, .cto-privacy, [id*='criteo']";
+
+    // JavaScriptを使ってスタイルシートをインジェクトするスクリプト
+    QString jsCode = QString(
+        "(function() {"
+        "  var style = document.getElementById('simplweb-adblock-style');"
+        "  if (!style) {"
+        "    style = document.createElement('style');"
+        "    style.id = 'simplweb-adblock-style';"
+        "    document.head.appendChild(style);"
+        "  }"
+        "  style.innerHTML = '%1 { display: none !important; }';"
+        "})();"
+    ).arg(cssSelectors);
+
+    // ページ内でJavaScriptを実行
+    view->page()->runJavaScript(jsCode);
+});
 
     uriLineEdit->setText("https://google.com");
     navigateToUri();
