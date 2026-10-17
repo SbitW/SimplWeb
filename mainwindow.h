@@ -10,30 +10,52 @@
 #include <QWebEnginePage>
 #include <QWebEnginePermission>
 #include <QWebEngineFullScreenRequest>
+#include <QDebug>
 class AdBlockInterceptor : public QWebEngineUrlRequestInterceptor
 {
     Q_OBJECT
 public:
-    explicit AdBlockInterceptor(QObject *parent = nullptr) : QWebEngineUrlRequestInterceptor(parent) {}
+    explicit AdBlockInterceptor(QObject *parent = nullptr)
+        : QWebEngineUrlRequestInterceptor(parent)
+    {
+        // ブロックしたいキーワードやドメインのリスト
+        m_blackList = {
+            "doubleclick.net",
+            "googlesyndication.com",
+            "adservice.google",
+            "pagead",
+            "adserver",
+            "yads.yahoo.co.jp",
+            "adchoices",
+            "adchoice",
+            "criteo.com",
+            "criteo.net",
+            "amazon-adsystem.com",
+            "adnxs.com",
+            "rubiconproject.com",
+            "pubmatic.com",
+            "microad.jp",
+            "fluct.jp"
+        };
+    }
 
-    // すべての通信リクエストがここを通過します
     void interceptRequest(QWebEngineUrlRequestInfo &info) override {
-        QString url = info.requestUrl().toString();
+        QString uriStr = info.requestUrl().toString().toLower(); // 表記揺れ対策で小文字化
 
-        // 簡易的なブロックリスト（ここにドメインやキーワードを指定）
-        if (url.contains("doubleclick.net") ||
-            url.contains("://googlesyndication.com") ||
-            url.contains("adserver") ||
-            url.contains("pagead") ||
-            url.contains("yads.yahoo.co.jp") ||            // Yahooの広告など
-            url.contains("adservice.google")){
-            // リクエストをブロック（拒否）する
-            info.block(true);
-            // ターミナルにブロックログを出力
-            qDebug() << "[Blocked Ad]:" << url;
+        // リスト内のいずれかのキーワードが含まれているかチェック
+        for (const QString &keyword : m_blackList) {
+            if (uriStr.contains(keyword)) {
+                info.block(true);
+                qDebug() << "[Blocked Ad]:" << uriStr;
+                return; // ブロックしたら即終了
+            }
         }
     }
+
+private:
+    QStringList m_blackList;
 };
+
 
 class CustomWebView : public QWebEngineView{
     Q_OBJECT
