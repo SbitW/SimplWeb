@@ -33,7 +33,7 @@ Configure the project with CMake.
 cmake ..
 ```
 *(補足:Qtが見つからない場合は、`-DCMAKE_PREFIX_PATH="path/to/Qt/6.x.x/your_compiler/"`を用いてインストールパスを指定してください。)*<br>
-*(Note: If Qt is not found, specify the path as shown above.)*
+*(Note: If Qt is not found, specify the path as shown above.)*<br>
 4. アプリケーションをビルドします。<br>
 Build the application.
 ```bash
