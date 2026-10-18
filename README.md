@@ -7,7 +7,7 @@ SimplWeb is a simple web browser based on Qt. It uses QtWebEngine, and is made i
 	* Intercepts and blocks advertising/tracking domains.
 * 全画面表示・ポインターロック対応(Full-screen and pointerlock support)
 	* 全画面表示の要求やポインターロックを自動的に承認し、SimplWebでのゲーミングを可能にします。
-	* Seamlessly handles full-screen requets and auto-grants pointerlock permissions, enabling gaming with SimplWeb.
+	* Seamlessly handles full-screen requests and auto-grants pointerlock permissions, enabling gaming with SimplWeb.
 * WebGPU・GPUアクセラレーション有効(WebGPU and GPU Acceleration enabled)
 	* SimplWebは実験的なWebGPUをサポートし、またGPUラスタライズを強制します。最新のWebアプリやゲームに最適化されています。 
 	* SimplWeb supports experimental WebGPU and forces GPU rasterization, and is optimised for modern Web apps and games.
