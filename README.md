@@ -1,35 +1,45 @@
 ## SimplWeb
-SimplWeb is a simple web browser based on Qt. It uses QtWebEngine, and is made in C++.<br>
 SimplWebはQtで作られたシンプルなウェブブラウザです。これはQtWebEngineを使用しており、C++で作られています。<br>
+SimplWeb is a simple web browser based on Qt. It uses QtWebEngine, and is made in C++.<br>
+## 特徴(Features)
+* 組み込み広告ブロッカー(Built-in Ad Blocker)
+	* 広告ドメインとの通信を遮断する広告ブロッカーを内蔵しています。
+	* Intercepts and blocks advertising/tracking domains.
+* 全画面表示・ポインターロック対応(Full-screen and pointerlock support)
+	* 全画面表示の要求やポインターロックを自動的に承認し、SimplWebでのゲーミングを可能にします。
+	* Seamlessly handles full-screen requets and auto-grants pointerlock permissions, enabling gaming with SimplWeb.
+* WebGPU・GPUアクセラレーション有効(WebGPU and GPU Acceleration enabled)
+	* SimplWebは実験的なWebGPUをサポートし、またGPUラスタライズを強制します。最新のWebアプリやゲームに最適化されています。 
+	* SimplWeb supports experimental WebGPU and forces GPU rasterization, and is optimised for modern Web apps and games.
 ## ビルド(Build)
 ### 前提条件(Prerequisites)
-* CMake (version 3.16 or higher)
-* C++ Compiler with C++17 support (GCC 8+, Clang 5+, MSVC 2017+)
-* Qt6 (Required components: `Widgets`, `WebEngineWidgets`)
-	* *Note for Qt installation: **QtWebEngine** is often not selected by default. Please ensure it is checked during the Qt installation process.*
+* CMake (バージョン3.16以上 | version 3.16 or higher)
+* C++17をサポートするC++コンパイラ (C++ Compiler with C++17 support: GCC 8+, Clang 5+, MSVC 2017+)
+* Qt6 (必要なコンポーネント | Required Components: `Widgets`, `WebEngineWidgets`)
 	* *Qtインストール時の注意: **QtWebEngine** はデフォルトで未選択の場合があります。インストールの際に必ずチェックを入れてください。*
+	* *Note for Qt installation: **QtWebEngine** is often not selected by default. Please ensure it is checked during the Qt installation process.*
 ### 手順(Steps)
-1. Download CMakeLists.txt, main.cpp, mainwindow.cpp, and mainwindow.h. Place them in the same folder.<br>
-CMakeLists.txt、main.cpp、mainwindow.cpp、mainwindow.hをダウンロードし、全て同じフォルダに配置します。
-2. Create a build directory and navigate into it.<br>
-ビルド用のフォルダを作成し、その中に移動します。
+1. CMakeLists.txt、main.cpp、mainwindow.cpp、mainwindow.hをダウンロードし、全て同じフォルダに配置します。<br>
+Download CMakeLists.txt, main.cpp, mainwindow.cpp, and mainwindow.h. Place them in the same folder.
+2. ビルド用のフォルダを作成し、その中に移動します。<br>
+Create a build directory and navigate into it.
 ```bash
 mkdir build
 cd build
 ```
-3. Configure the project with CMake.<br>
-CMakeを実行してビルド設定を生成します。
+3. CMakeを実行してビルド設定を生成します。<br>
+Configure the project with CMake.
 ```bash
 cmake ..
 ```
-*(Note: If Qt is not found, specify the path using `-DCMAKE_PREFIX_PATH="path/to/Qt/6.x.x/your_compiler/"`)*<br>
-*(補足:Qtが見つからない場合は、上記の通りにインストールパスを指定してください。)*
-4. Build the application.<br>
-アプリケーションをビルドします。
+*(補足:Qtが見つからない場合は、`-DCMAKE_PREFIX_PATH="path/to/Qt/6.x.x/your_compiler/"`を用いてインストールパスを指定してください。)*<br>
+*(Note: If Qt is not found, specify the path as shown above.)*
+4. アプリケーションをビルドします。<br>
+Build the application.
 ```bash
 cmake --build .
 ```
 ## ライセンス(License)
-This software is published under [GPLv3](LICENSE).<br>
-このソフトウェアは[GPLv3](LICENSE)の元で公開されています。
+このソフトウェアは[GPLv3](LICENSE)の元で公開されています。<br>
+This software is published under [GPLv3](LICENSE).
 
